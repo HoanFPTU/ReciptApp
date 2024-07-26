@@ -4,7 +4,7 @@ import {RouteProp} from '@react-navigation/native';
 export type MainStackParams = {
   HOME: undefined;
   SPLASHSCREEN: undefined;
-  DETAIL: undefined;
+  DETAIL: {id: string};
 };
 export type PropsPush = NativeStackNavigationProp<
   MainStackParams,
@@ -12,4 +12,4 @@ export type PropsPush = NativeStackNavigationProp<
 >;
 // chỉ cần 1 cái PropsPush cho màn hình HOME là có thể làm hết cho các
 //  màn hình còn lại vì type truyền vào đã đủ r
-export type PropsRoute = RouteProp<MainStackParams, SCREENS.HOME>;
+export type PropsRouteDetail = RouteProp<MainStackParams, SCREENS.DETAIL>;

@@ -1,25 +1,30 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {ICONS} from '../constant/constant';
+import {ICONS, SCREENS} from '../constant/constant';
 import {style} from './Style';
+import {useNavigation} from '@react-navigation/native';
+import {PropsPush} from '../screen/navigation/TypeCheck';
 type ItemFoodProps = {
   url: string;
   catogery: string;
   title: string;
   tags: string;
-  onPress?: Function;
+  // onPress?: Function;
+  id: string;
 };
 export default function ItemFood({
   url,
   catogery,
   title,
   tags,
-  onPress,
+  id,
 }: ItemFoodProps) {
+  const navigation = useNavigation<PropsPush>();
+
   return (
     <TouchableOpacity
       onPress={() => {
-        onPress && onPress();
+        navigation.push(SCREENS.DETAIL, {id});
       }}
       style={style.item}>
       <Image
@@ -37,6 +42,7 @@ export default function ItemFood({
             <Text style={[style.itemTextColor, style.itemTitle]}>{title}</Text>
             <Text style={style.itemTextColor}>{tags ? tags : ''}</Text>
           </View>
+
           <Image style={[style.itemIcon]} source={ICONS.BOOKMARK} />
         </View>
       </View>

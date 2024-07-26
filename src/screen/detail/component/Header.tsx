@@ -6,11 +6,25 @@ import {useNavigation} from '@react-navigation/native';
 import {PropsPush} from '../../navigation/TypeCheck';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export default function Header() {
+import Toast from 'react-native-toast-message';
+import storage from '../../../storage/storage';
+type PropsHeader = {url?: string};
+export default function Header({url}: PropsHeader) {
   const navigation = useNavigation<PropsPush>();
+  const onPressBookMark = () => {
+    storage.save({key: 'oke', data: 'nguyenHoan'});
+    Toast.show({
+      type: 'success',
+      text1: 'Success Storage',
+      visibilityTime: 1000,
+    });
+  };
   return (
     <View>
-      <Image source={IMAGES.food} style={style.imageHeader} />
+      <Image
+        source={url ? {uri: url} : IMAGES.food}
+        style={style.imageHeader}
+      />
       <View style={style.cHeaderContent}>
         <View style={style.cHeaderContentTop}>
           <TouchableOpacity
@@ -23,10 +37,12 @@ export default function Header() {
             />
           </TouchableOpacity>
           {/* arrow-back */}
-          <Image
-            source={ICONS.BOOKMARK}
-            style={[style.iconHeader, {tintColor: COLORS.greenLight}]}
-          />
+          <TouchableOpacity onPress={onPressBookMark}>
+            <Image
+              source={ICONS.BOOKMARK}
+              style={[style.iconHeader, {tintColor: COLORS.greenLight}]}
+            />
+          </TouchableOpacity>
           {/* bookmark */}
         </View>
         <View

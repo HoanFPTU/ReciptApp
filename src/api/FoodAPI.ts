@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {ResponseCategory, ResponseMeal} from './Type';
+import {ResponseCategory, ResponseDetailMeal, ResponseMeal} from './Type';
 
 export const FoodAPI = createApi({
   reducerPath: 'FoodAPI',
@@ -13,6 +13,13 @@ export const FoodAPI = createApi({
     getCategoryMeal: builder.query<ResponseCategory, void>({
       query: () => 'categories.php',
     }),
+    getFullMealbyID: builder.query<ResponseDetailMeal, string>({
+      query: (id: string) => `lookup.php?i=${id}`,
+    }),
   }),
 });
-export const {useGetTrendingMealQuery, useGetCategoryMealQuery} = FoodAPI;
+export const {
+  useGetTrendingMealQuery,
+  useGetCategoryMealQuery,
+  useGetFullMealbyIDQuery,
+} = FoodAPI;
