@@ -7,8 +7,8 @@ import {useGetTrendingMealQuery} from '../../../api/FoodAPI';
 
 export default function Trending() {
   const {data, isError, isFetching} = useGetTrendingMealQuery();
-
-  // const onSendToDetailPage = () => {
+  console.log(data);
+  // const <onSendToDetailPag></onSendToDetailPag>e = () => {
   //   console.log('chưa nhấn mà');
 
   // };

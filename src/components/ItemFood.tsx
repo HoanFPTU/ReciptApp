@@ -42,7 +42,6 @@ export default function ItemFood({
             <Text style={[style.itemTextColor, style.itemTitle]}>{title}</Text>
             <Text style={style.itemTextColor}>{tags ? tags : ''}</Text>
           </View>
-
           <Image style={[style.itemIcon]} source={ICONS.BOOKMARK} />
         </View>
       </View>

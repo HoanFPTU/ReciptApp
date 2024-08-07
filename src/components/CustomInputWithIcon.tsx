@@ -10,5 +10,5 @@ export default function InputWithIcon() {
       <TextInput style={style.input}></TextInput>
     </View>
   );
-  s;
+  
 }

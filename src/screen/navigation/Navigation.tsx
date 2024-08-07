@@ -18,9 +18,10 @@ export const MainNavigation = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false, animationEnabled: false}}>
-      <Stack.Screen name={SCREENS.TAB} component={TabNavigation} />
-      <Stack.Screen name={SCREENS.SPLASHSCREEN} component={SlashScreen} />
+              <Stack.Screen name={SCREENS.TAB} component={TabNavigation} />
       <Stack.Screen name={SCREENS.DETAIL} component={Detail} />
+
+      <Stack.Screen name={SCREENS.SPLASHSCREEN} component={SlashScreen} />
 
       {/* component thay bằng bottom tab
       3tab nữa : search, bookmark,configuration
@@ -59,7 +60,7 @@ export function TabNavigation() {
         component={Home}
         options={{
           tabBarIcon: ({focused}) => (
-            <TabIcon focused={focused} icon={ICONS.HOME} />
+            <TabIcon focused={  focused} icon={ICONS.HOME} />
           ),
         }}
       />

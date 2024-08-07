@@ -4,11 +4,14 @@ import {style} from './Style';
 type PropsButton = {
   title: string;
   style?: ViewStyle;
+  onPress?: () => void;
   // để ở đây là style nữa thì trùng tên phải dùng props.style
 };
 export function PrimaryButton(props: PropsButton) {
   return (
-    <TouchableOpacity style={[style.btnPrimary, props.style]}>
+    <TouchableOpacity
+      style={[style.btnPrimary, props.style]}
+      onPress={props.onPress}>
       <Text style={style.textWhite}>{props.title}</Text>
     </TouchableOpacity>
   );

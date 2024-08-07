@@ -53,3 +53,12 @@ export const ICONS = {
   ARROWBACK: require('../img/arrow-back-icon.png'),
   ARROWNEXT: require('../img/arrow-right-icon.png'),
 };
+
+export const STORAGE_KEY = {
+  bookmark: 'BOOKMARK',
+};
+export type BookMarkType = {
+  urlImage: string;
+  title: string;
+  id: string;
+};

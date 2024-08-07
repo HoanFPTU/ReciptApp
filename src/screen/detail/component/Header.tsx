@@ -1,6 +1,13 @@
 import {View, Text, Image} from 'react-native';
-import React from 'react';
-import {COLORS, ICONS, IMAGES, SIZES} from '../../../constant/constant';
+import React, {useEffect, useState} from 'react';
+import {
+  BookMarkType,
+  COLORS,
+  ICONS,
+  IMAGES,
+  SIZES,
+  STORAGE_KEY,
+} from '../../../constant/constant';
 import {style} from '../style';
 import {useNavigation} from '@react-navigation/native';
 import {PropsPush} from '../../navigation/TypeCheck';
@@ -8,21 +15,52 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import Toast from 'react-native-toast-message';
 import storage from '../../../storage/storage';
-type PropsHeader = {url?: string};
-export default function Header({url}: PropsHeader) {
+import {
+  addBookmark,
+  isBookmark,
+  removeBookmark,
+} from '../../../redux/createAsyncThunk';
+import {useAppDispatch} from '../../../redux/store';
+type PropsHeader = {
+  urlImage: string;
+  id: string;
+  title: string;
+};
+export default function Header({urlImage, id, title}: PropsHeader) {
   const navigation = useNavigation<PropsPush>();
-  const onPressBookMark = () => {
-    storage.save({key: 'oke', data: 'nguyenHoan'});
-    Toast.show({
-      type: 'success',
-      text1: 'Success Storage',
-      visibilityTime: 1000,
+  const dispatch = useAppDispatch();
+  const [isFav, setIsFav] = useState<any>(false);
+  const checkBookmark = async (id: string) => {
+    dispatch(isBookmark(id)).then(data => {
+      setIsFav(data.payload);
     });
   };
+  const handleAddBookmark = () => {
+    dispatch(addBookmark({id, title, urlImage})).then(data => {
+      Toast.show({
+        type: 'success',
+        text1: `Add ${title} to bookmark successfully`,
+      });
+      checkBookmark(id);
+    });
+  };
+  const handleRemoveBookmark = () => {
+    dispatch(removeBookmark(id)).then(data => {
+      Toast.show({
+        type: 'success',
+        text1: `Remove ${title}  to bookmark successfully`,
+      });
+      checkBookmark(id);
+    });
+  };
+
+  useEffect(() => {
+    checkBookmark(id);
+  }, [dispatch, id]);
   return (
     <View>
       <Image
-        source={url ? {uri: url} : IMAGES.food}
+        source={urlImage ? {uri: urlImage} : IMAGES.food}
         style={style.imageHeader}
       />
       <View style={style.cHeaderContent}>
@@ -37,10 +75,16 @@ export default function Header({url}: PropsHeader) {
             />
           </TouchableOpacity>
           {/* arrow-back */}
-          <TouchableOpacity onPress={onPressBookMark}>
+          <TouchableOpacity
+            onPress={() =>
+              isFav ? handleRemoveBookmark() : handleAddBookmark()
+            }>
             <Image
               source={ICONS.BOOKMARK}
-              style={[style.iconHeader, {tintColor: COLORS.greenLight}]}
+              style={[
+                style.iconHeader,
+                {tintColor: isFav ? COLORS.greenLight : COLORS.black},
+              ]}
             />
           </TouchableOpacity>
           {/* bookmark */}
