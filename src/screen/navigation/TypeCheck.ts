@@ -5,7 +5,7 @@ export type MainStackParams = {
   HOME: undefined;
   SPLASHSCREEN: undefined;
   DETAIL: {id: string};
-  TAB: undefined;
+  SEARCH: {dataSearch: string};
 };
 export type PropsPush = NativeStackNavigationProp<
   MainStackParams,
@@ -15,3 +15,4 @@ export type PropsPush = NativeStackNavigationProp<
 //  màn hình còn lại vì type truyền vào đã đủ r
 // k truyền nữa cũng ko ảnh hưởng gì cả
 export type PropsRouteDetail = RouteProp<MainStackParams, SCREENS.DETAIL>;
+export type PropRouteSearch = RouteProp<MainStackParams, SCREENS.SEARCH>;

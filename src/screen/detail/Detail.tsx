@@ -4,13 +4,13 @@ import Header from './component/Header';
 import Body from './component/Body';
 import {useRoute} from '@react-navigation/native';
 import {PropsRouteDetail} from '../navigation/TypeCheck';
-import {useGetFullMealbyIDQuery} from '../../api/FoodAPI';
+import {useGetFullMealByIDQuery} from '../../api/FoodAPI';
 import {useAppDispatch} from '../../redux/store';
 import {isBookmark} from '../../redux/createAsyncThunk';
 
 export default function Detail() {
   const route = useRoute<PropsRouteDetail>();
-  const {data} = useGetFullMealbyIDQuery(route.params.id);
+  const {data} = useGetFullMealByIDQuery(route.params.id);
   const meal = data?.meals[0];
 
   return (

@@ -2,10 +2,7 @@ import {View, Text, Image} from 'react-native';
 import React from 'react';
 import {IMAGES, SIZES} from '../../../constant/constant';
 import {ScrollView} from 'react-native-gesture-handler';
-import {style} from '../style';
-import {useGetFullMealbyIDQuery} from '../../../api/FoodAPI';
-import {useRoute} from '@react-navigation/native';
-import {PropsRouteDetail} from '../../navigation/TypeCheck';
+import {style} from '../style'
 import {DetailMeal} from '../../../api/Type';
 type PropsBody = {meal?: DetailMeal};
 export default function Body({meal}: PropsBody) {

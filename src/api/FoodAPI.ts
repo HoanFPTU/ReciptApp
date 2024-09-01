@@ -13,13 +13,17 @@ export const FoodAPI = createApi({
     getCategoryMeal: builder.query<ResponseCategory, void>({
       query: () => 'categories.php',
     }),
-    getFullMealbyID: builder.query<ResponseDetailMeal, string>({
+                                                                                                                                                                                                  getFullMealByID: builder.query<ResponseDetailMeal, string>({
       query: (id: string) => `lookup.php?i=${id}`,
+    }),
+    searchMealByName: builder.query<ResponseDetailMeal, string>({
+      query: (name: string) => `search.php?s=${name}`,
     }),
   }),
 });
 export const {
   useGetTrendingMealQuery,
   useGetCategoryMealQuery,
-  useGetFullMealbyIDQuery,
+  useGetFullMealByIDQuery,
+  useSearchMealByNameQuery,
 } = FoodAPI;

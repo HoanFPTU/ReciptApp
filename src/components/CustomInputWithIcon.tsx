@@ -3,12 +3,16 @@ import React from 'react';
 import {style} from './Style';
 import {ICONS, IMAGES} from '../constant/constant';
 
-export default function InputWithIcon() {
+type InPutProps = {
+  onChange: Function;
+};
+export default function InputWithIcon({onChange}: InPutProps) {
   return (
     <View style={style.containerInput}>
       <Image source={ICONS.SEARCH} style={style.icon} />
-      <TextInput style={style.input}></TextInput>
+      <TextInput
+        style={style.input}
+        onChangeText={data => onChange(data)}></TextInput>
     </View>
   );
-  
 }
